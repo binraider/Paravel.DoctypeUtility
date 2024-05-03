@@ -33,14 +33,19 @@
 
 ---
 
-# This is the basic view
+### This is the basic view after clicking "View Diffs"
+Diff Id is when the ids are different
+Diff Key is when the Guids are different
+Diff Items are there are some differences between the properties of the doctype
+Diff Vary is when the item is "Vary By Culture"
+
 ![The basic view](img/grab-1.png)
 
-# this view is when you have clicked "View Diffs"
+### this view is when you have clicked "View". The properties of the relevent doctype are listed below
 
 ![Viewing the properties of a doctype](img/grab-2.png)
 
-# this view is when you cant connect
+### This view is when you cant connect
 
 ![When you cant connect](img/grab-3.png)
 
