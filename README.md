@@ -1,28 +1,33 @@
 # Paravel.DoctypeUtility
 1. A utility for comparing Doctypes on Different Umbraco sites.
 2. This is written for Umbraco 13. 
-3. Basically you install it on sites that  you want to compare Doctypes
-4. A dashboard will appear in the settings next to "Telemetry Data"
-5. You must add the sites in appsettings.json in the form stated below
+3. Basically you install it on sites when you want to compare Doctypes to see if they are out of sync.
+4. A dashboard will appear in the settings next to "Telemetry Data" or something like that.
+5. You must add the sites in appsettings.json in the form stated below:
 
 ```
 "DTUSettings": {
   "AuthToken": "6c1fddb5-003c-4059-bbe4-8be016e12e5f",
   "Sites": [
     {
-      "Name": "Published_site",
-      "Url": "http://umbraco13a4.local"
+      "Name": "Umbraco 13 A4",
+      "Url": "http://umbraco13a4.local",
+      "Key": "staging"
     },
     {
-      "Name": "Self",
-      "Url": "https://localhost:44317"
+      "Name": "Umbraco 13 A5",
+      "Url": "https://localhost:44317",
+      "Key": "development"
     },
     {
-      "Name": "Some_other_site",
-      "Url": "https://localhost:44324"
+      "Name": "Umbraco 13 A4 Debug",
+      "Url": "https://localhost:44324",
+      "Key": "local"
     }
   ]
 }
 
 ```
-6. The "Name" field is used in the angular
+6. The "Key" field is used in the angular to differenciate between the entries, so it has to be unique, although its only used locally, so does not have to match on the other sites appsettings.
+7. The "AuthToken" field must be shared between the sites you want to compare. 
+
