@@ -23,6 +23,12 @@
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="README_nuget.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README_nuget.md" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.1.1" />
