@@ -1,4 +1,9 @@
 # Paravel.DoctypeUtility
+
+[[Downloads]](https://www.nuget.org/packages/Paravel.DoctypeUtility/)
+[[NuGet]](https://www.nuget.org/packages/Paravel.DoctypeUtility)
+[[GitHub license]](https://github.com/binraider/Paravel.DoctypeUtility?tab=MIT-1-ov-file#readme)
+
 1. A utility for comparing Doctypes on Different Umbraco sites.
 2. This is written for Umbraco 13  - versions 13.1.1 and above. 
 3. Basically you install it (via Nuget) on sites when you want to compare Doctypes to see if they are out of sync.
@@ -35,26 +40,4 @@
 10. The "Key" field is used in the angular to differenciate between the entries, so it has to be unique. It has no relevence to the other sites appsettings, so on another site they could be "meenie", "miny" "moe".
 11. The "AuthToken" field must be shared between the sites you want to compare. Please provide your own value for this.  
 
----
-
-### This is the basic view after clicking "View Diffs"
-- Diff Id indicates that the ids are different
-- Diff Key indicates that the Guids are different
-- Diff Items indicates that there are some differences between the properties of the doctype
-- Diff Vary indicates that the item is "Vary By Culture"
-
-
-
-![The basic view](img/grab-1.png)
-
-### This view is when you have clicked "View". 
-The properties of the relevent doctype are listed below. 
-You can see that although the remote and local block selected have similar properties, 
-for the remote doctype the Doctype is "VaryByCulture" and two of the properties are also "VaryByCulture".
-
-![Viewing the properties of a doctype](img/grab-2.png)
-
-### This view is when you cannot connect:
-
-![When you cant connect](img/grab-3.png)
-
+## See the github page for more information

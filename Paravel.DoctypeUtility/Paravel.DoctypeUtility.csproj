@@ -15,13 +15,18 @@
     <Version>1.0.3</Version>
     <Authors>Binraider</Authors>
     <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © Binraider</Copyright>
+    <PackageProjectUrl>https://github.com/binraider/Paravel.DoctypeUtility</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/binraider/Paravel.DoctypeUtility</RepositoryUrl>
+    <PackageReadmeFile>README_nuget.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.0.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.1.1" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.1.1" />
   </ItemGroup>
   
 </Project>
