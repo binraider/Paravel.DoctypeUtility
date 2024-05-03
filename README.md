@@ -31,9 +31,16 @@
 6. The "Key" field is used in the angular to differenciate between the entries, so it has to be unique, although its only used locally, so does not have to match on the other sites appsettings.
 7. The "AuthToken" field must be shared between the sites you want to compare. 
 
+---
+
+# This is the basic view
 ![The basic view](img/grab-1.png)
 
+# this view is when you have clicked "View Diffs"
+
 ![Viewing the properties of a doctype](img/grab-2.png)
+
+# this view is when you cant connect
 
 ![When you cant connect](img/grab-3.png)
 
