@@ -82,7 +82,6 @@ public class DTUSettings
 
 public class DTUSite
 {
-    public bool Local { get; set; } = false;
     public string Name { get; set; } = string.Empty;
     public string Url { get; set; } = string.Empty;
 }

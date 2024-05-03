@@ -4,8 +4,8 @@
 
     <div ng-if="vm.loaded">
         <h4>Sites list</h4>
-        <div ng-if="!vm.sites">
-            <p>No Items</p>
+        <div ng-if="vm.sitesMissing">
+            <p>No Sites Configured</p>
         </div>
         <div class="umb-table">
             <div class="umb-table-head">
@@ -15,7 +15,7 @@
                     <div class="umb-table-cell">Site</div>
                     <div class="umb-table-cell">{{itm.Name}}</div>
                     <div class="umb-table-cell">{{itm.Url}}</div>
-                    <div class="umb-table-cell"><span ng-if="!itm.Local"><umb-button button-style="info" action="vm.ListDifferences(itm.Name)" label="View diffs"></umb-button></span></div>
+                    <div class="umb-table-cell"><span><umb-button button-style="info" action="vm.ListDifferences(itm.Name)" label="View diffs"></umb-button></span></div>
                 </div>
             </div>
         </div>
@@ -28,37 +28,37 @@
             <p>Message: <span ng-if="vm.doctypes"> {{vm.doctypes.Message}} </span> </p>
         </div>
 
-        <div class="umb-table" ng-if="vm.doctypes">
-            <div class="umb-table-head">
-                <div class="umb-table-row">
-                    <div class="umb-table-cell">Diff Id</div>
-                    <div class="umb-table-cell">Diff Key</div>
-                    <div class="umb-table-cell">Diff Items</div>
-                    <div class="umb-table-cell">Diff Vary</div>
-                    <div class="umb-table-cell">Local Name</div>
-                    <div class="umb-table-cell">Local Alias</div>
-                    <div class="umb-table-cell">Remote Name</div>
-                    <div class="umb-table-cell">Remote Alias</div>
-                    <div class="umb-table-cell"> &nbsp; </div>
-                </div>
-            </div>
-            <div class="umb-table-body">
-                <div class="umb-table-row -selectable" ng-repeat="itm in vm.doctypes.Doctypes">
-                    <div class="umb-table-cell">{{itm.DiffId}}</div>
-                    <div class="umb-table-cell">{{itm.DiffKey}}</div>
-                    <div class="umb-table-cell">{{itm.DiffItems}}</div>
-                    <div class="umb-table-cell">{{itm.DiffVbc}}</div>
-                    <div class="umb-table-cell">{{itm.Local.Name}}</div>
-                    <div class="umb-table-cell">{{itm.Local.Alias}}</div>
-                    <div class="umb-table-cell">{{itm.Remote.Name}}</div>
-                    <div class="umb-table-cell">{{itm.Remote.Alias}}</div>
-                    <div class="umb-table-cell"><umb-button button-style="info" action="vm.ShowItems(itm.Local.Alias)" label="View"></umb-button></div>
-                </div>
-            </div>
-        </div>
+        <table class="doctypeutility-table" ng-if="vm.doctypes">
+            <thead>
+                <tr>
+                    <td>Diff Id</td>
+                    <td>Diff Key</td>
+                    <td>Diff Items</td>
+                    <td>Diff Vary</td>
+                    <td>Local Name</td>
+                    <td>Local Alias</td>
+                    <td>Remote Name</td>
+                    <td>Remote Alias</td>
+                    <td> &nbsp; </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="itm in vm.doctypes.Doctypes">
+                    <td>{{itm.DiffId}}</td>
+                    <td>{{itm.DiffKey}}</td>
+                    <td>{{itm.DiffItems}}</td>
+                    <td>{{itm.DiffVbc}}</td>
+                    <td>{{itm.Local.Name}}</td>
+                    <td>{{itm.Local.Alias}}</td>
+                    <td>{{itm.Remote.Name}}</td>
+                    <td>{{itm.Remote.Alias}}</td>
+                    <td><umb-button button-style="info" action="vm.ShowItems(itm.Local.Alias, itm.Remote.Alias)" label="View"></umb-button></td>
+                </tr>
+            </tbody>
+        </table>
         <br />
         <h4>Properties</h4>
-        <div class="umb-box-row" ng-if="vm.selectedDoctype">
+        <div class="umb-box-row" ng-if="vm.selectedDoctypeLoaded">
             <umb-box>
                 <umb-box-content>
                     <p><strong>Local:</strong> {{vm.selectedDoctype.Local.Name}}</p>

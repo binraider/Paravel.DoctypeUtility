@@ -38,14 +38,16 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
     public List<DTUSite> ListSites()
     {
         var sites = new List<DTUSite>();
-        foreach (var site in _dtuSettings.Sites)
+        if (_dtuSettings != null && _dtuSettings.Sites != null)
         {
-            sites.Add(new DTUSite
+            foreach (var site in _dtuSettings.Sites)
             {
-                Name = site.Name,
-                Url = site.Url,
-                Local = site.Local
-            });
+                sites.Add(new DTUSite
+                {
+                    Name = site.Name,
+                    Url = site.Url
+                });
+            }
         }
         return sites;
     }
@@ -223,7 +225,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
         string apiUrl = ""; // "http://umbraco13a4.local/getdoctypesauth"; // https://epiris2024.local/GetDocTypes";
         if (_dtuSettings.Sites != null && _dtuSettings.Sites.Count > 0)
         {
-            var siteObjs = _dtuSettings.Sites.Where(x => x.Local != true);
+            var siteObjs = _dtuSettings.Sites;
             var siteObj = siteObjs.Where(x => x.Name == sitename).FirstOrDefault();
             if (siteObj != null)
             {
