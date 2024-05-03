@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>    
+    <StaticWebAssetBasePath>App_Plugins</StaticWebAssetBasePath>
+    <ContentTargetFolders>.</ContentTargetFolders>
+    <Product>Paravel.DoctypeUtility</Product>
+    <PackageId>Paravel.DoctypeUtility</PackageId>
+    <Title>Paravel.DoctypeUtility</Title>
+    <Description>This package allows you to view differences between doctypes across different Umbraco 13 instances</Description>
+    <PackageTags>umbraco plugin package</PackageTags>
+    <RootNamespace>Paravel.DoctypeUtility</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.12</Version>
+    <Authors>Binraider</Authors>
+    <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © Binraider</Copyright>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.1.1" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.1.1" />
+  </ItemGroup>
+  
+</Project>
