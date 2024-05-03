@@ -39,10 +39,10 @@ angular.module('umbraco').controller('doctypeUtilityController', ['$scope', 'edi
                 });
         }
 
-        function ListDifferences(siteName) {
+        function ListDifferences(key, siteName) {
             vm.selectedDoctypeLoaded = false;
             vm.selectedDoctype = {};
-            doctypeUtilityService.ListDifferences(siteName)
+            doctypeUtilityService.ListDifferences(key)
                 .then(function (data) {
                     vm.dtloaded = false;
                     console.log(data.data);

@@ -13,8 +13,8 @@
         function ListSites() {
             return $http.get(`${serviceRoot}ListSites`);
         }  
-        function ListDifferences(siteName) {
-            return $http.get(`${serviceRoot}ListDifferences?siteName=${siteName}`);
+        function ListDifferences(key) {
+            return $http.get(`${serviceRoot}ListDifferences?key=${key}`);
         }
 
         return resource;

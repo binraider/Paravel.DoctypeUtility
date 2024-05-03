@@ -45,7 +45,8 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
                 sites.Add(new DTUSite
                 {
                     Name = site.Name,
-                    Url = site.Url
+                    Url = site.Url,
+                    Key = site.Key
                 });
             }
         }
@@ -53,16 +54,16 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
     }
 
     [HttpGet]
-    public async Task<DoubleDoctypeBundle> ListDifferences([FromQuery] string siteName)
+    public async Task<DoubleDoctypeBundle> ListDifferences([FromQuery] string key)
     {
         DoubleDoctypeBundle outy = new DoubleDoctypeBundle();
 
-        outy = await CompareDoctypesPrivate(siteName);
+        outy = await CompareDoctypesPrivate(key);
 
         return outy;
     }
 
-    private async Task<DoubleDoctypeBundle> CompareDoctypesPrivate(string siteName)
+    private async Task<DoubleDoctypeBundle> CompareDoctypesPrivate(string key)
     {
         // Here we are comparing on Alias - and ignoring Key and Id
         DoubleDoctypeBundle outcome = new DoubleDoctypeBundle();
@@ -79,7 +80,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
         List<DoctypeDTO> localdoctypes = new List<DoctypeDTO>();
         List<DoctypeDTO> remotedoctypes = new List<DoctypeDTO>();
 
-        remote = await GetRemoteDoctypes(siteName);
+        remote = await GetRemoteDoctypes(key);
         if (remote.Success)
         {
             local = GetDoctypeBundleLocal();
@@ -215,7 +216,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
     }
 
 
-    private async Task<DoctypeBundle> GetRemoteDoctypes(string sitename)
+    private async Task<DoctypeBundle> GetRemoteDoctypes(string key)
     {
         var outy = new DoctypeBundle();
 
@@ -226,7 +227,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
         if (_dtuSettings.Sites != null && _dtuSettings.Sites.Count > 0)
         {
             var siteObjs = _dtuSettings.Sites;
-            var siteObj = siteObjs.Where(x => x.Name == sitename).FirstOrDefault();
+            var siteObj = siteObjs.Where(x => x.Key == key).FirstOrDefault();
             if (siteObj != null)
             {
                 if (siteObj.Url.EndsWith("/"))
@@ -240,7 +241,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
             }
         }
 
-        outy.Message += $"sitename:{sitename} Site: {site} - Sites.Count: {_dtuSettings.Sites.Count}";
+        outy.Message += $"key:{key} Site: {site} - Sites.Count: {_dtuSettings.Sites.Count}";
 
         if (site.Length > 0)
         {
@@ -299,7 +300,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
         var outy = new DoctypeBundle();
         var doctypes = _contentTypeService.GetAll().Select(x => new DoctypeDTO
         {
-            Name = x.Name,
+            Name = x.Name ?? "A name",
             Key = x.Key,
             Alias = x.Alias,
             Id = x.Id,
