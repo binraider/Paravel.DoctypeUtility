@@ -32,7 +32,7 @@ public class DoctypeUtilityController : UmbracoApiController
         _contentTypeService = contentTypeService;
         _config = config;
         var settings = _config.GetSection(DTUSettings.SectionName);
-        if(settings != null)
+        if (settings != null)
         {
             _dtuSettings = settings.Get<DTUSettings>();
         }
@@ -53,7 +53,7 @@ public class DoctypeUtilityController : UmbracoApiController
             // Token is in the format "Bearer {token_value}"
             string tokenValue = "";
             string[] arr = token.ToString().Split(' ');
-            if(arr.Length > 1)
+            if (arr.Length > 1)
             {
                 tokenValue = arr[1];
             }
@@ -82,6 +82,7 @@ public class DoctypeUtilityController : UmbracoApiController
             Key = x.Key,
             Alias = x.Alias,
             Id = x.Id,
+            Vbc = (int)x.Variations, // x.VariesByCulture() ? 1 : 0,
             Items = x.PropertyTypes.Select(y => new DoctypeElementDTO
             {
                 Id = y.Id,
@@ -90,7 +91,9 @@ public class DoctypeUtilityController : UmbracoApiController
                 PropertyEditorAlias = y.PropertyEditorAlias,
                 DataTypeId = y.DataTypeId,
                 DataTypeKey = y.Key,
-                DatabaseType = y.ValueStorageType
+                DatabaseType = y.ValueStorageType,
+                Vbc = (int)y.Variations //y.VariesByCulture() ? 1 : 0
+
             }).ToList()
         });
 

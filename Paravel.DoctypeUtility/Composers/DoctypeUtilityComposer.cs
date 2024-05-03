@@ -30,10 +30,10 @@ internal class DTUManifestFilter : IManifestFilter
             PackageName = "Paravel.DoctypeUtility",
             Version = assembly.GetName()?.Version?.ToString(3) ?? "0.1.0",
             AllowPackageTelemetry = true,
-            Scripts = new string[] 
+            Scripts = new string[]
                 {
                     "/App_Plugins/DoctypeUtility/doctypeutility.service.js",
-                    "/App_Plugins/DoctypeUtility/doctypeutility.controller.js"                    
+                    "/App_Plugins/DoctypeUtility/doctypeutility.controller.js"
                 },
             Dashboards = new[]
             {
@@ -45,7 +45,8 @@ internal class DTUManifestFilter : IManifestFilter
                     Weight = 100
                 }
             }
-                     
+
         });
     }
 }
+

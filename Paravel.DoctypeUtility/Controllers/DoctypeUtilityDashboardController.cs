@@ -9,16 +9,17 @@ using Umbraco.Cms.Web.BackOffice.Controllers;
 
 namespace Paravel.DoctypeUtility.Controllers;
 
+
 public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
 {
-    private readonly ILogger<DoctypeUtilityDashboardController> _logger;    
+    private readonly ILogger<DoctypeUtilityDashboardController> _logger;
     private readonly IContentTypeService _contentTypeService;
     private DTUSettings _dtuSettings;
     private readonly IConfiguration _config;
 
-    public DoctypeUtilityDashboardController(IConfiguration config,  ILogger<DoctypeUtilityDashboardController> logger, IContentTypeService contentTypeService)
+    public DoctypeUtilityDashboardController(IConfiguration config, ILogger<DoctypeUtilityDashboardController> logger, IContentTypeService contentTypeService)
     {
-        _logger = logger;        
+        _logger = logger;
         _contentTypeService = contentTypeService;
         _config = config;
         var settings = _config.GetSection(DTUSettings.SectionName);
@@ -136,9 +137,10 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
                 commondoctypes[a].ExistRemote = 1;
                 commondoctypes[a].DiffId = (commondoctypes[a].Local.Id != commondoctypes[a].Remote.Id) ? 1 : 0;
                 commondoctypes[a].DiffKey = (commondoctypes[a].Local.Key != commondoctypes[a].Remote.Key) ? 1 : 0;
-                commondoctypes[a].DiffItems = CompareDoctypeItems(commondoctypes[a].Local.Items, commondoctypes[a].Remote.Items) ? 1 : 0;
+                commondoctypes[a].DiffVbc = (commondoctypes[a].Local.Vbc != commondoctypes[a].Remote.Vbc) ? 1 : 0;
+                commondoctypes[a].DiffItems = AreDoctypeItemsDifferent(commondoctypes[a].Local.Items, commondoctypes[a].Remote.Items) ? 1 : 0;
 
-                if (commondoctypes[a].DiffId > 0 || commondoctypes[a].DiffKey > 0 || commondoctypes[a].DiffItems > 0)
+                if (commondoctypes[a].DiffId > 0 || commondoctypes[a].DiffKey > 0 || commondoctypes[a].DiffVbc > 0 || commondoctypes[a].DiffItems > 0)
                 {
                     commondoctypes[a].Local.Status = PropTypeStatus.Different;
                     commondoctypes[a].Remote.Status = PropTypeStatus.Different;
@@ -159,14 +161,14 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
     }
 
 
-    private bool CompareDoctypeItems(List<DoctypeElementDTO> local, List<DoctypeElementDTO> remote)
+    private bool AreDoctypeItemsDifferent(List<DoctypeElementDTO> local, List<DoctypeElementDTO> remote)
     {
         bool different = false;
         int localcount = 0;
         int remotecount = 0;
         bool IsFound = false;
 
-        if(local != null)
+        if (local != null)
         {
             localcount = local.Count;
         }
@@ -175,7 +177,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
             remotecount = remote.Count;
         }
 
-        if(localcount != remotecount)
+        if (localcount != remotecount)
         {
             return true;
         }
@@ -191,21 +193,21 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
             }
             else
             {
-                if (prop.DatabaseType != remoteProp.DatabaseType || prop.DataTypeKey != remoteProp.DataTypeKey)
+                if (prop.DatabaseType != remoteProp.DatabaseType || prop.DataTypeKey != remoteProp.DataTypeKey || prop.Vbc != remoteProp.Vbc)
                 {
                     return true;
                 }
             }
         }
 
-        foreach(var remoteProp in remote)
+        foreach (var remoteProp in remote)
         {
             var localProp = local.FirstOrDefault(x => x.Alias == remoteProp.Alias);
             if (localProp == null)
             {
                 return true;
-            }            
-        }   
+            }
+        }
 
         return different;
     }
@@ -299,6 +301,7 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
             Key = x.Key,
             Alias = x.Alias,
             Id = x.Id,
+            Vbc = (int)x.Variations, // x.VariesByCulture() ? 1 : 0,
             Items = x.PropertyTypes.Select(y => new DoctypeElementDTO
             {
                 Id = y.Id,
@@ -307,7 +310,8 @@ public class DoctypeUtilityDashboardController : UmbracoAuthorizedApiController
                 PropertyEditorAlias = y.PropertyEditorAlias,
                 DataTypeId = y.DataTypeId,
                 DataTypeKey = y.Key,
-                DatabaseType = y.ValueStorageType
+                DatabaseType = y.ValueStorageType,
+                Vbc = (int)y.Variations //y.VariesByCulture() ? 1 : 0
             }).ToList()
         });
 

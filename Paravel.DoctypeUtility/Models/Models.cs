@@ -15,12 +15,12 @@ public class DoubleDoctypeBundle
     public bool Success { get; set; } = true;
 }
 
-
 public class DoubleDoctypeDTO
 {
     public int DiffId { get; set; } = 0;
     public int DiffKey { get; set; } = 0;
     public int DiffItems { get; set; } = 0;
+    public int DiffVbc { get; set; } = 0;
     public int ExistLocal { get; set; } = 0;
     public int ExistRemote { get; set; } = 0;
     public DoctypeDTO Local { get; set; } = new DoctypeDTO();
@@ -43,6 +43,7 @@ public class DoctypeDTO
     public int Id { get; set; } = 0;
     public Guid Key { get; set; } = Guid.Empty;
     public List<DoctypeElementDTO> Items { get; set; }
+    public int Vbc { get; set; } = 0;
 
     public DoctypeDTO()
     {
@@ -61,6 +62,7 @@ public class DoctypeElementDTO
     public int DataTypeId { get; set; } = 0;
     public Guid DataTypeKey { get; set; } = Guid.Empty;
     public ValueStorageType DatabaseType { get; set; } = ValueStorageType.Ntext;
+    public int Vbc { get; set; } = 0;
 }
 
 public enum PropTypeStatus

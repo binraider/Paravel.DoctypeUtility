@@ -1,0 +1,141 @@
+﻿<div ng-controller="doctypeUtilityController as vm">
+    <h3>Doctype Utility</h3>
+    <umb-load-indicator ng-if="!vm.loaded"></umb-load-indicator>
+
+    <div ng-if="vm.loaded">
+        <h4>Sites list</h4>
+        <div ng-if="!vm.sites">
+            <p>No Items</p>
+        </div>
+        <div class="umb-table">
+            <div class="umb-table-head">
+            </div>
+            <div class="umb-table-body">
+                <div class="umb-table-row -selectable" ng-repeat="itm in vm.sites">
+                    <div class="umb-table-cell">Site</div>
+                    <div class="umb-table-cell">{{itm.Name}}</div>
+                    <div class="umb-table-cell">{{itm.Url}}</div>
+                    <div class="umb-table-cell"><span ng-if="!itm.Local"><umb-button button-style="info" action="vm.ListDifferences(itm.Name)" label="View diffs"></umb-button></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.dtloaded">
+        <h4>Doctypes</h4>
+        <div>
+            <p>Success: <span ng-if="vm.doctypes"> {{vm.doctypes.Success}} </span> </p>
+            <p>Message: <span ng-if="vm.doctypes"> {{vm.doctypes.Message}} </span> </p>
+        </div>
+
+        <div class="umb-table" ng-if="vm.doctypes">
+            <div class="umb-table-head">
+                <div class="umb-table-row">
+                    <div class="umb-table-cell">Diff Id</div>
+                    <div class="umb-table-cell">Diff Key</div>
+                    <div class="umb-table-cell">Diff Items</div>
+                    <div class="umb-table-cell">Diff Vary</div>
+                    <div class="umb-table-cell">Local Name</div>
+                    <div class="umb-table-cell">Local Alias</div>
+                    <div class="umb-table-cell">Remote Name</div>
+                    <div class="umb-table-cell">Remote Alias</div>
+                    <div class="umb-table-cell"> &nbsp; </div>
+                </div>
+            </div>
+            <div class="umb-table-body">
+                <div class="umb-table-row -selectable" ng-repeat="itm in vm.doctypes.Doctypes">
+                    <div class="umb-table-cell">{{itm.DiffId}}</div>
+                    <div class="umb-table-cell">{{itm.DiffKey}}</div>
+                    <div class="umb-table-cell">{{itm.DiffItems}}</div>
+                    <div class="umb-table-cell">{{itm.DiffVbc}}</div>
+                    <div class="umb-table-cell">{{itm.Local.Name}}</div>
+                    <div class="umb-table-cell">{{itm.Local.Alias}}</div>
+                    <div class="umb-table-cell">{{itm.Remote.Name}}</div>
+                    <div class="umb-table-cell">{{itm.Remote.Alias}}</div>
+                    <div class="umb-table-cell"><umb-button button-style="info" action="vm.ShowItems(itm.Local.Alias)" label="View"></umb-button></div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <h4>Properties</h4>
+        <div class="umb-box-row" ng-if="vm.selectedDoctype">
+            <umb-box>
+                <umb-box-content>
+                    <p><strong>Local:</strong> {{vm.selectedDoctype.Local.Name}}</p>
+                    <table class="doctypeutility-table">
+                        <thead>
+                            <tr>
+                                <td>Alias</td>
+                                <td>Name</td>
+                                <td>DatabaseType</td>
+                                <td>Vbc</td>
+                                <td>DataTypeId</td>
+                                <td>PropertyEditorAlias</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="prp in vm.selectedDoctype.Local.Items">
+                                <td>{{prp.Alias}}</td>
+                                <td>{{prp.Name}}</td>
+                                <td>{{prp.DatabaseType}}</td>
+                                <td>{{prp.Vbc}}</td>
+                                <td>{{prp.DataTypeId}}</td>
+                                <td>{{prp.PropertyEditorAlias}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </umb-box-content>
+            </umb-box>
+            <umb-box>
+                <umb-box-content>
+                    <p><strong>Remote:</strong> {{vm.selectedDoctype.Remote.Name}}</p>
+                    <table class="doctypeutility-table">
+                        <thead>
+                            <tr>
+                                <td>Alias</td>
+                                <td>Name</td>
+                                <td>DatabaseType</td>
+                                <td>Vbc</td>
+                                <td>DataTypeId</td>
+                                <td>PropertyEditorAlias</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="prp in vm.selectedDoctype.Remote.Items">
+                                <td>{{prp.Alias}}</td>
+                                <td>{{prp.Name}}</td>
+                                <td>{{prp.DatabaseType}}</td>
+                                <td>{{prp.Vbc}}</td>
+                                <td>{{prp.DataTypeId}}</td>
+                                <td>{{prp.PropertyEditorAlias}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </umb-box-content>
+            </umb-box>
+        </div>
+    </div>
+    <style>
+        table.doctypeutility-table {
+            width: 100%;
+        }
+
+            table.doctypeutility-table thead td {
+                padding: 4px;
+                color: #333;
+                font-weight: bold;
+                border-bottom: solid 2px #ccc;
+                font-size: 0.85rem;
+            }
+
+            table.doctypeutility-table tbody td {
+                padding: 4px;
+                color: #333;
+                font-size: 0.8rem;
+                border-bottom: solid 1px #eee;
+            }
+    </style>
+</div>
+
+
+
